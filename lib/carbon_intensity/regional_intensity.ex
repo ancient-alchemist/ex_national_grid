@@ -1,6 +1,8 @@
 defmodule ExNationalGrid.CarbonIntensity.RegionalIntensity do
   import ExNationalGrid.Helpers
 
+  alias ExNationalGrid.Helpers.Regions
+
   @moduledoc """
   Regional Carbon Intensity data
   """
@@ -45,7 +47,16 @@ defmodule ExNationalGrid.CarbonIntensity.RegionalIntensity do
   Get Regional Carbon Intensity data for current half hour for specified region.
   """
   def get_intensity_for_region(regionid) do
-    "/regional/regionid/#{regionid}" |> build_url() |> execute!() |> decode!()
+    case Regions.get_by_id(regionid) do
+      nil ->
+        {:error, "Region inexistent"}
+
+      _ ->
+        "/regional/regionid/#{regionid}"
+        |> build_url()
+        |> execute!()
+        |> decode!()
+    end
   end
 
   @doc """
@@ -69,10 +80,16 @@ defmodule ExNationalGrid.CarbonIntensity.RegionalIntensity do
   Get Regional Carbon Intensity data for next 24h for specified region.
   """
   def get_intensity_for_next_24hrs_for_region(from, regionid) do
-    "/regional/intensity/#{from}/fw24h/regionid/#{regionid}"
-    |> build_url()
-    |> execute!()
-    |> decode!()
+    case Regions.get_by_id(regionid) do
+      nil ->
+        {:error, "Region inexistent"}
+
+      _ ->
+        "/regional/intensity/#{from}/fw24h/regionid/#{regionid}"
+        |> build_url()
+        |> execute!()
+        |> decode!()
+    end
   end
 
   @doc """
@@ -96,10 +113,16 @@ defmodule ExNationalGrid.CarbonIntensity.RegionalIntensity do
   Get Regional Carbon Intensity data for next 48h for specified postcode.
   """
   def get_intensity_for_next_48hrs_for_region(from, regionid) do
-    "/regional/intensity/#{from}/fw48h/regionid/#{regionid}"
-    |> build_url()
-    |> execute!()
-    |> decode!()
+    case Regions.get_by_id(regionid) do
+      nil ->
+        {:error, "Region inexistent"}
+
+      _ ->
+        "/regional/intensity/#{from}/fw48h/regionid/#{regionid}"
+        |> build_url()
+        |> execute!()
+        |> decode!()
+    end
   end
 
   @doc """
@@ -123,10 +146,16 @@ defmodule ExNationalGrid.CarbonIntensity.RegionalIntensity do
   Get Regional Carbon Intensity data for past 24h for specified region.
   """
   def get_intensity_for_past_24hrs_for_region(from, regionid) do
-    "/regional/intensity/#{from}/pt24h/regionid/#{regionid}"
-    |> build_url()
-    |> execute!()
-    |> decode!()
+    case Regions.get_by_id(regionid) do
+      nil ->
+        {:error, "Region inexistent"}
+
+      _ ->
+        "/regional/intensity/#{from}/pt24h/regionid/#{regionid}"
+        |> build_url()
+        |> execute!()
+        |> decode!()
+    end
   end
 
   @doc """
@@ -150,9 +179,15 @@ defmodule ExNationalGrid.CarbonIntensity.RegionalIntensity do
   Get Regional Carbon Intensity data between specified datetimes.
   """
   def get_intensity_between_for_region(from, to, regionid) do
-    "/regional/intensity/#{from}/#{to}/regionid/#{regionid}"
-    |> build_url()
-    |> execute!()
-    |> decode!()
+    case Regions.get_by_id(regionid) do
+      nil ->
+        {:error, "Region inexistent"}
+
+      _ ->
+        "/regional/intensity/#{from}/#{to}/regionid/#{regionid}"
+        |> build_url()
+        |> execute!()
+        |> decode!()
+    end
   end
 end

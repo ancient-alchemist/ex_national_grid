@@ -1,4 +1,4 @@
-defmodule ExNationalGrid.Regions do
+defmodule ExNationalGrid.Helpers.Regions do
   @regions %{
     "1" => "North Scotland",
     "2" => "South Scotland",
