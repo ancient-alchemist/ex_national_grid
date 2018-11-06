@@ -1,4 +1,4 @@
-defmodule ExNationalGrid.CarbonIntensity.RegionalIntensity do
+defmodule ExNationalGrid.CarbonIntensity.RegIntensity do
   import ExNationalGrid.Helpers
 
   alias ExNationalGrid.Helpers.Regions
